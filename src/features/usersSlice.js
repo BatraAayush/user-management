@@ -11,7 +11,7 @@ export const getAllUsers = createAsyncThunk(
       return users;
     }
     try {
-      const response = await axios.get(`${BASE_URL}/use`);
+      const response = await axios.get(`${BASE_URL}/users`);
       const result = response.data;
       return result;
     } catch (error) {
