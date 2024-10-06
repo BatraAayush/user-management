@@ -11,11 +11,12 @@ export const getAllUsers = createAsyncThunk(
       return users;
     }
     try {
-      const response = await axios.get(`${BASE_URL}/users`);
+      const response = await axios.get(`${BASE_URL}/use`);
       const result = response.data;
       return result;
     } catch (error) {
-      return rejectWithValue(error);
+      console.error(error)
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -31,7 +32,7 @@ export const createUser = createAsyncThunk(
       }
     } catch (e) {
       console.error(e);
-      return rejectWithValue(error);
+      return rejectWithValue(e.message);
     }
   }
 );

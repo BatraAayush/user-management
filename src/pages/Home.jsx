@@ -6,7 +6,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import Loader from "../components/Loader";
 
 const Home = () => {
-  const { users, loading } = useSelector((state) => state.users);
+  const { users, loading, error } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
 
@@ -25,12 +25,21 @@ const Home = () => {
 
   const filterdUsers = () => {
     return users.filter((user) =>
-      user.username.toLowerCase().includes(search.toLowerCase())
+      user.username?.toLowerCase().includes(search.toLowerCase())
     );
   };
 
   if (loading.get || loading.delete || loading.create || loading.update) {
     return <Loader />;
+  }
+
+  if (error) {
+    alert(error);
+    return (
+      <div className="m-4 text-xl text-red-500 flex justify-center">
+        Error: {error}
+      </div>
+    );
   }
 
   return (
